@@ -11,18 +11,26 @@ const HomeScreen = ({navigation }) => {
       <Text>Home Screen</Text>
       <Button
         title="Go to Details"
-        onPress={() => navigation.navigate('FeedScreen')}
+        onPress={() => navigation.navigate('FeedScreen', {
+        itemId: 86,
+            name: 'anything you want here',
+          })}
       />
     </View>
   );
 }
 
 
-const FeedScreen = () => {
+const FeedScreen = ({navigation, route}) => {
+
+  const { itemId, name } = route.params;
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>FeedScreen</Text>
-     
+      <Text>FeedScreen {itemId} {name}</Text>
+      <Button
+        title="Go to Details... again"
+        onPress={() => navigation.push('FeedScreen')}
+        />
     </View>
   );
 }
