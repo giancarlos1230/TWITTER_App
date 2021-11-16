@@ -14,3 +14,5 @@ const FeedScreen = ({navigation, route}) => {
       </View>
     );
   }
+
+  export default FeedScreen
