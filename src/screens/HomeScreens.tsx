@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Text, StyleSheet, View } from 'react-native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { MainStackParamList } from '../navigators/MainStackNavigator';
 
-const HomeScreen = ({ navigation }) => {
+type Props = NativeStackScreenProps<MainStackParamList, 'HomeScreen'>;
+
+
+const HomeScreen = ({ navigation }: Props) => {
   const [tweetsData, setTweetsData] = useState([])
 
   const getTweets = async () => {
@@ -17,14 +22,24 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={{ fontSize: 40 }}>Home Screen</Text>
+      <Text style={{ fontSize: 30 }}>HomeScreen</Text>
       {
         tweetsData.map(tweet => (
-          <Text key={tweet.id}>{tweet.tweet_text}</Text>
-        ))
-      }
+          <View key={tweet.id}>
+          <Text> {tweet.tweet_text}</Text>
+      <Button
+        title="Detalles"
+        onPress={() => navigation.navigate('TweetDetailScreen',{
+            id: tweet.id,
+            tweet_text: tweet.tweet_text,
+        })}/>
     </View>
-  );
+  ))
+}
+
+</View>
+);
+
 }
 
 export default HomeScreen
